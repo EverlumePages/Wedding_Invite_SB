@@ -1,0 +1,57 @@
+# ── Operating system ──────────────────────────────────
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+# macOS
+.DS_Store
+.AppleDouble
+._*
+# Linux
+.directory
+*~
+
+# ── Editors and IDEs ──────────────────────────────────
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# ── Local tooling, if any is ever added ───────────────
+# The site itself is plain HTML/CSS/JS and needs no build step, but a live
+# server, a formatter or a minifier dropped in later brings these along.
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+.vite/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# ── Secrets and machine-local settings ────────────────
+# Nothing here uses them today; this keeps a stray one from being committed
+# by accident, since the RSVP number and any future keys live in script.js.
+.env
+.env.*
+!.env.example
+
+# ── Working files that do not belong in the repo ──────
+# Design sources and exports kept beside the site while it is being built.
+*.psd
+*.ai
+*.xcf
+*.zip
+*.rar
+*.7z
+*.tmp
+*.bak
+*.orig

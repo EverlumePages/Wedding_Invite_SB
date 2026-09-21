@@ -1,8 +1,8 @@
 /* =========================================================
    මංගල ආරාධනා — Sri Lankan Wedding Invitation
    Traditional Sinhala Buddhist (Magul Poruwa) theme
-   Palette: maroon · turmeric gold · peacock teal · lotus pink
-   on warm temple-paper cream.
+   Palette: gold · white · golden brown, shared with the envelope screen.
+   Warm white paper throughout.
    ---------------------------------------------------------
    1 · Tokens        5 · Sections
    2 · Reset         6 · Keyframes
@@ -11,23 +11,37 @@
    ========================================================= */
 
 /* ═══ 1 · TOKENS ══════════════════════════════════════ */
+/* Gold, white and golden brown, carried over from the envelope screen so the
+   intro and the invitation are one world.
+   The token NAMES are unchanged on purpose — they are referenced in well over a
+   hundred places, and renaming them would be a far larger edit than recolouring
+   is. Read --maroon as "the deep one" and --saffron as "the gold one".
+   --maroon is now only ever type on pale paper — headings, names, emphasis.
+   Every filled surface uses the --gold-surface pair below instead. */
 :root {
-  --maroon: #6E1423;
-  --maroon-deep: #4A0E18;
-  --maroon-soft: #8A2435;
-  --saffron: #E0991F;
-  --saffron-light: #F4C148;
-  --saffron-deep: #B9760C;
-  --peacock: #0F6E64;
-  --peacock-deep: #0A4A43;
-  --lotus: #E2879E;
-  --leaf: #2E7D52;
-  --paper: #FBF3E2;
-  --paper-deep: #F3E6CB;
-  --ivory: #FFFDF6;
-  --ink: #3A1E12;
-  --ink-soft: #6B4A38;
-  --gold-line: rgba(185, 118, 12, .45);
+  --maroon: #7A5A16;        /* deep golden brown — headings, dark surfaces */
+  --maroon-deep: #4A3609;   /* darkest brown — the foot of those gradients */
+  --maroon-soft: #96721A;
+  --saffron: #C9A227;
+  --saffron-light: #E7CE8A;
+  --saffron-deep: #97731A;
+  --peacock: #8A7340;       /* was teal; now a muted bronze */
+  --peacock-deep: #5F4F28;
+  --lotus: #E0C489;
+  --leaf: #8F7A3E;
+  --paper: #FAF6EC;
+  --paper-deep: #F0E8D6;
+  --ivory: #FFFDF8;
+  --ink: #3E3218;
+  --ink-soft: #6B5B44;
+  --gold-line: rgba(168, 128, 26, .45);
+
+  /* Filled gold surfaces — the countdown tiles, the buttons, the footer.
+     --on-gold is the only text colour that belongs on them: they used to be
+     dark brown carrying cream type, and cream on gold is unreadable. */
+  --gold-surface: #D4A62C;
+  --gold-surface-deep: #B98D1E;
+  --on-gold: #402F07;
 
   --serif: "Cormorant Garamond", Georgia, serif;
   --sinhala: "Noto Serif Sinhala", "Iskoola Pota", serif;
@@ -37,8 +51,8 @@
   --ease: cubic-bezier(.22, 1, .36, 1);
   --maxw: 1180px;
   --gutter: clamp(20px, 5vw, 72px);
-  --shadow-soft: 0 18px 48px rgba(74, 14, 24, .14);
-  --shadow-deep: 0 30px 80px rgba(74, 14, 24, .28);
+  --shadow-soft: 0 18px 48px rgba(110, 88, 42, .16);
+  --shadow-deep: 0 30px 80px rgba(110, 88, 42, .3);
 }
 
 /* ═══ 2 · RESET ═══════════════════════════════════════ */
@@ -65,10 +79,10 @@ body {
 
   /* Temple-paper backdrop: warm blooms + a woven liya-pata tile */
   background-image:
-    radial-gradient(circle at 18% 10%, rgba(224, 153, 31, .12) 0%, transparent 42%),
-    radial-gradient(circle at 84% 76%, rgba(15, 110, 100, .09) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(110, 20, 35, .05) 0%, transparent 70%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23B9760C' stroke-opacity='0.10' stroke-width='1'%3E%3Cpath d='M30 6c8 8 8 16 0 24-8-8-8-16 0-24zM30 30c8 8 8 16 0 24-8-8-8-16 0-24z'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%23B9760C' fill-opacity='0.12' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+    radial-gradient(circle at 18% 10%, rgba(201, 162, 39, .14) 0%, transparent 42%),
+    radial-gradient(circle at 84% 76%, rgba(168, 128, 26, .1) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(122, 90, 22, .05) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23A8801A' stroke-opacity='0.10' stroke-width='1'%3E%3Cpath d='M30 6c8 8 8 16 0 24-8-8-8-16 0-24zM30 30c8 8 8 16 0 24-8-8-8-16 0-24z'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%23A8801A' fill-opacity='0.12' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
   background-attachment: fixed;
 }
 
@@ -158,9 +172,9 @@ p {
   letter-spacing: .16em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--ivory);
-  background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-soft) 100%);
-  box-shadow: 0 10px 26px rgba(110, 20, 35, .3);
+  color: var(--on-gold);
+  background: linear-gradient(135deg, var(--gold-surface) 0%, var(--gold-surface-deep) 100%);
+  box-shadow: 0 10px 26px rgba(150, 114, 26, .34);
   cursor: pointer;
   transition: transform .4s var(--ease), box-shadow .4s var(--ease), filter .4s var(--ease);
 }
@@ -168,7 +182,7 @@ p {
 .btn:hover,
 .btn:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 16px 34px rgba(110, 20, 35, .38);
+  box-shadow: 0 16px 34px rgba(150, 114, 26, .42);
   filter: brightness(1.08);
 }
 
@@ -191,14 +205,14 @@ p {
 
 .btn--ghost:hover,
 .btn--ghost:focus-visible {
-  background: rgba(224, 153, 31, .12);
-  box-shadow: 0 10px 24px rgba(185, 118, 12, .2);
+  background: rgba(201, 162, 39, .12);
+  box-shadow: 0 10px 24px rgba(168, 128, 26, .2);
 }
 
 .btn--seal {
   background: linear-gradient(135deg, var(--saffron-deep) 0%, var(--saffron-light) 100%);
   color: var(--maroon-deep);
-  box-shadow: 0 12px 30px rgba(224, 153, 31, .4);
+  box-shadow: 0 12px 30px rgba(201, 162, 39, .4);
 }
 
 /* ── Ornamental divider (hansa puttuwa) ── */
@@ -225,25 +239,37 @@ p {
   gap: clamp(18px, 3vw, 30px);
 }
 
+/* Gold leaf rather than a flat hairline: the border is painted as a gradient
+   into the border box, the same way the envelope's card is — the first layer
+   fills the padding box, the second shows only through the border. The inset
+   shadow adds the fine keyline that a printed gold edge leaves inside itself. */
 .card {
   padding: 38px 28px;
   text-align: center;
-  background: var(--ivory);
-  border: 1px solid var(--gold-line);
-  border-radius: 4px;
-  box-shadow: var(--shadow-soft);
+  background-image:
+    linear-gradient(var(--ivory), var(--ivory)),
+    linear-gradient(135deg, var(--saffron-light) 0%, var(--saffron) 26%, #8C6714 50%, var(--saffron) 74%, var(--saffron-light) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 3px solid transparent;
+  border-radius: 26px;
+  box-shadow: inset 0 0 0 1px rgba(201, 162, 39, .32), var(--shadow-soft);
   transition: transform .5s var(--ease), box-shadow .5s var(--ease);
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-deep);
+  /* The keyline is carried over, or it would blink off on hover. */
+  box-shadow: inset 0 0 0 1px rgba(201, 162, 39, .32), var(--shadow-deep);
 }
 
+/* These icons are images now, not emoji, so they take a width rather than a
+   font-size. The sizes below match the optical weight the emoji had. */
 .card__icon {
   display: block;
-  font-size: 2rem;
-  margin-bottom: 12px;
+  width: 46px;
+  height: auto;
+  margin: 0 auto 12px;
 }
 
 .card h3 {
@@ -289,7 +315,7 @@ p {
 .field textarea:focus {
   outline: none;
   border-color: var(--saffron);
-  box-shadow: 0 0 0 3px rgba(224, 153, 31, .16);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, .16);
 }
 
 .field label {
@@ -366,7 +392,7 @@ p {
   backdrop-filter: blur(10px);
   border: 1px solid var(--gold-line);
   border-radius: 999px;
-  box-shadow: 0 8px 22px rgba(74, 14, 24, .16);
+  box-shadow: 0 8px 22px rgba(110, 88, 42, .18);
   cursor: pointer;
   transition: transform .35s var(--ease), background .35s var(--ease);
 }
@@ -394,7 +420,9 @@ p {
   display: block;
   width: 3px;
   height: 5px;
-  background: var(--maroon);
+  /* Deep gold rather than the surface gold — these bars sit on a pale dock
+     button, so they need to stay darker than the fill does. */
+  background: var(--saffron-deep);
   border-radius: 2px;
   transition: height .3s var(--ease);
 }
@@ -417,8 +445,8 @@ p {
   padding: 12px 22px;
   font-family: var(--sans);
   font-size: .84rem;
-  color: var(--ivory);
-  background: var(--maroon-deep);
+  color: var(--on-gold);
+  background: linear-gradient(135deg, var(--gold-surface) 0%, var(--gold-surface-deep) 100%);
   border-radius: 999px;
   box-shadow: var(--shadow-deep);
   transform: translate(-50%, 20px);
@@ -446,10 +474,27 @@ p {
   animation: burst 1.6s var(--ease) forwards;
 }
 
+/* A real petal cut-out carries its own silhouette — the drawn teardrop's
+   border-radius would clip the corners off it. */
+.burst__petal--img {
+  border-radius: 0;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
 /* ═══ 5 · SECTIONS ════════════════════════════════════ */
 
 /* ── 5.1 Envelope intro ── */
+/* The intro is the one screen that leaves the Kandyan palette behind — a
+   photographic flat-lay on warm white — and hands back to the maroon hero on
+   its way out. Its colours live here, scoped to .env, never on :root, so not a
+   pixel of the invitation below shifts. */
 .env {
+  --e-gold:    #C9A227;
+  --e-gold-lt: #E7CE8A;
+  --e-gold-dk: #A8801A;
+  --e-paper:   #F4F0E9;
+
   display: none; /* revealed only when JS runs */
   position: fixed;
   inset: 0;
@@ -457,185 +502,289 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(28px, 6vh, 56px);
+  gap: clamp(24px, 5vh, 48px);
   padding: 24px;
+  overflow: hidden;
+  /* Studio backdrop: warm white, lifted in the middle, dropped at the corners
+     so the flat-lay has something to sit on. */
   background:
-    radial-gradient(circle at 50% 42%, #7A1A2B 0%, var(--maroon-deep) 55%, #2C0810 100%);
+    radial-gradient(ellipse 120% 85% at 50% 44%, #FFFDF9 0%, #F5F1E9 52%, #E6DFD2 100%);
 }
 
 .js .env {
   display: flex;
 }
 
+/* Skip and the reduced-motion path get the same dissolve the full timeline
+   tweens, rather than snapping from white to maroon. */
 .env.is-gone {
   pointer-events: none;
+  opacity: 0;
+  transition: opacity .7s var(--ease);
 }
 
 .env__glow {
   position: absolute;
-  top: 42%;
+  top: 44%;
   left: 50%;
-  width: min(760px, 120vw);
+  width: min(720px, 118vw);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(244, 193, 72, .2) 0%, transparent 62%);
-  animation: pulse 5s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(255, 246, 226, .9) 0%, transparent 62%);
+  animation: pulse 6s ease-in-out infinite;
   pointer-events: none;
+}
+
+/* ── corner florals ───────────────────────────────────── */
+/* Anchored off-frame so each one reads as spilling in from outside, the way
+   the flat-lay is styled, rather than sitting politely inside the margin. */
+.env__fl {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 10px 18px rgba(150, 128, 100, .18));
+}
+
+.env__fl--tl { top: -5%;  left: -13%;  width: min(300px, 47vw); transform: rotate(-8deg); }
+.env__fl--tr { top: -7%;  right: -12%; width: min(320px, 50vw); transform: rotate(14deg) scaleX(-1); }
+.env__fl--bl { bottom: -8%; left: -14%; width: min(270px, 44vw); transform: rotate(10deg); }
+.env__fl--br { bottom: -6%; right: -11%; width: min(250px, 40vw); transform: rotate(-12deg); }
+/* The odd one out on the right edge, echoing the ring in the reference. */
+.env__fl--r  { top: 46%; right: -9%;  width: min(150px, 24vw); transform: translateY(-50%) rotate(6deg); opacity: .9; }
+
+.env__petals {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Scaled by the push-in, so .env__body keeps its own tweens to itself. */
+.env__stage {
+  position: relative;
+  z-index: 2;
+  will-change: transform;
 }
 
 .env__body {
   position: relative;
-  z-index: 2;
-  /* The 78vh cap keeps the envelope — and the card once it rises out of it —
-     on screen in landscape and on short viewports. */
-  width: min(420px, 86vw, 78vh);
-  aspect-ratio: 1.5;
-  perspective: 1600px;
-  transform-style: preserve-3d;
+  /* Matches the envelope photograph's own proportions, so the two layers and
+     the card all share one coordinate space. */
+  width: min(430px, 86vw, 52vh);
+  aspect-ratio: 1239 / 1269;
+  /* The card turns a full 360° on its Y axis; this is what makes that a turn
+     in space rather than a flat squash. No preserve-3d here — it would drop
+     every child into one shared 3D space, where z-index stops sorting and the
+     card paints straight through the envelope front. */
+  perspective: 1300px;
 }
 
-/* the card that rises out */
+/* ── the envelope, in two layers ──────────────────────── */
+.env__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.env__layer--back {
+  z-index: 1;
+  filter: drop-shadow(0 26px 44px rgba(120, 98, 72, .28));
+}
+
+/* Sits in front of the card, so the card's foot tucks behind the pocket the
+   way a real one does. */
+.env__layer--front {
+  z-index: 3;
+  filter: drop-shadow(0 10px 18px rgba(120, 98, 72, .16));
+}
+
+/* The sealed state, laid over the open one. Both open layers start at zero and
+   cross-fade in behind the swinging flap. */
+.env__closed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.env__closed--body {
+  z-index: 4;
+  filter: drop-shadow(0 26px 44px rgba(120, 98, 72, .28));
+}
+
+.env__closed--flap {
+  z-index: 5;
+  /* The hinge. The layer is the full photographic frame, and the flap's folded
+     top edge sits 38.6% of the way down it — rotating about the element's own
+     centre would tear the flap off the envelope. */
+  transform-origin: 50% 38.6%;
+  filter: drop-shadow(0 6px 14px rgba(120, 98, 72, .22));
+}
+
+/* the wax seal's glow — the photograph's seal sits at 50.6% / 81% of frame */
+.env__sealglow {
+  position: absolute;
+  z-index: 6;
+  top: 81%;
+  left: 50.6%;
+  width: 26%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 226, 158, .75) 0%, transparent 66%);
+  /* Its own keyframe, not the shared sealPulse: that one animates transform
+     alone, which would drop the translate(-50%, -50%) and throw the glow off
+     the seal entirely. */
+  animation: sealGlowPulse 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── the card that rises out ──────────────────────────── */
 .env__card {
   position: absolute;
-  left: 6%;
-  bottom: 5%;
+  left: 50%;
+  top: 50%;
   z-index: 2;
-  width: 88%;
-  height: 92%;
-  background: linear-gradient(160deg, var(--ivory) 0%, var(--paper-deep) 100%);
-  border: 1px solid var(--gold-line);
-  border-radius: 3px;
-  box-shadow: 0 -10px 34px rgba(0, 0, 0, .22);
+  /* The ratio is the card photograph's own (675 × 1200), so the printed frame
+     arrives whole rather than cropped. The width is set from that: narrower
+     than the old card, but the same height, so it still stands in the same
+     relation to the envelope and the rise never has to be re-measured. */
+  width: min(272px, 54vw, 33vh);
+  aspect-ratio: .5625;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
+.env__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  border-radius: 3px;
+  /* Gold leaf, painted as a gradient into the border box: the first layer
+     fills the padding box, the second shows only through the border. */
+  border: 3px solid transparent;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 20px 44px rgba(110, 88, 62, .34);
+}
+
+/* The printed card itself. The photograph carries the frame — the rope arch,
+   the pearls and the roses — so the painted gold border and its keylines come
+   off: two frames on one card would fight. The element shares the file's
+   ratio, so `cover` crops nothing. */
+.env__face--front {
+  border-width: 0;
+  background-clip: border-box;
+  background-image: url("images/card%20image.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* The reverse, revealed halfway through the turn — the gatefold's own lace. */
+.env__face--back {
+  transform: rotateY(180deg);
+  background-image:
+    url("images/envelope/lace.webp"),
+    linear-gradient(135deg, var(--e-gold-lt) 0%, var(--e-gold) 26%, #8C6714 50%, var(--e-gold) 74%, var(--e-gold-lt) 100%);
+  background-size: cover, auto;
+  background-position: center, 0 0;
+}
+
+.env__back-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 54%;
+  transform: translate(-50%, -50%);
+  opacity: .85;
+}
+
+.env__back-mono {
+  position: relative;
+  font-family: var(--script);
+  font-size: clamp(2.1rem, 8vw, 3rem);
+  line-height: 1;
+  color: #B8901F;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+}
+
+/* The type sits in the clear ground inside the arch, not on the card as a
+   whole: the rope and pearls hold the edges, and the roses climb the lower
+   corners. Inset in per-cent off the photograph, so the words keep their place
+   on the print at every card size. */
 .env__card-inner {
+  position: absolute;
+  top: 16%;
+  right: 17%;
+  bottom: 22%;
+  left: 17%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 58%;
-  padding: 14px;
   text-align: center;
 }
 
-/* Concentric with the text block (which sits centred in the card's top 58%),
-   so the ring frames the monogram instead of cutting through it. */
+/* Sized against the type block it rings rather than the card, so it stays
+   clear of the rope arch instead of running under it. */
 .env__mono {
   position: absolute;
-  top: 29%;
+  top: 50%;
   left: 50%;
-  width: 62%;
-  max-width: 182px;
+  width: 104%;
   transform: translate(-50%, -50%);
-  opacity: .55;
+  opacity: .6;
+}
+
+.env__mono circle {
+  stroke: var(--e-gold);
 }
 
 .env__monogram {
   position: relative;
   font-family: var(--script);
-  font-size: clamp(2rem, 7vw, 2.9rem);
-  color: var(--maroon);
+  /* A shade smaller than before: the words now live inside the arch, which is
+     narrower than the card they used to have to themselves. */
+  font-size: clamp(2.4rem, 9vw, 3.4rem);
+  color: #BE9522;
   line-height: 1;
 }
 
 .env__si {
-  margin-top: 6px;
-  font-size: .95rem;
-  color: var(--saffron-deep);
+  margin-top: 10px;
+  font-size: 1.08rem;
+  color: var(--e-gold-dk);
 }
 
 .env__label {
-  margin-top: 4px;
+  margin-top: 6px;
   font-family: var(--sans);
-  font-size: .64rem;
-  letter-spacing: .3em;
+  /* Trimmed a little: this is the widest line in the stack, and at the old
+     size its tracking ran into the monogram ring. */
+  font-size: .6rem;
+  letter-spacing: .26em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: #8A7A64;
 }
 
-/* the envelope front */
-.env__pocket {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  background: linear-gradient(165deg, var(--maroon-soft) 0%, var(--maroon-deep) 100%);
-  border: 1px solid rgba(244, 193, 72, .38);
-  border-radius: 4px;
-  box-shadow: var(--shadow-deep);
-  overflow: hidden;
+.env__flourish {
+  width: 58%;
+  max-width: 140px;
+  margin-top: 12px;
 }
 
-.env__pocket::before,
-.env__pocket::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 72%;
-  height: 100%;
-  border-top: 1px solid rgba(244, 193, 72, .22);
-}
-
-.env__pocket::before {
-  left: -6%;
-  transform: skewX(32deg);
-  transform-origin: bottom left;
-}
-
-.env__pocket::after {
-  right: -6%;
-  transform: skewX(-32deg);
-  transform-origin: bottom right;
-}
-
-/* the flap */
-.env__flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  width: 100%;
-  height: 62%;
-  transform-origin: top center;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-.env__flap-art {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .3));
-}
-
-/* wax seal */
-.env__seal-wrap {
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  z-index: 6;
-  transform: translate(-50%, -50%);
-}
-
-.env__seal {
-  width: clamp(58px, 16vw, 78px);
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .45));
-  animation: sealPulse 2.6s ease-in-out infinite;
-}
-
-.env__shard {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 9px;
-  height: 9px;
-  background: var(--maroon);
-  border: 1px solid var(--saffron-light);
-  border-radius: 2px;
-  opacity: 0;
-}
-
+/* ── the prompt ───────────────────────────────────────── */
 .env__hint {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -647,52 +796,71 @@ p {
   font-size: clamp(1.4rem, 4.5vw, 2rem);
   font-style: italic;
   font-weight: 400;
-  color: var(--paper);
+  color: #6B5B44;
 }
 
-.env__skip {
-  padding: 4px 8px;
-  font-family: var(--sans);
-  font-size: .68rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: rgba(251, 243, 226, .62);
-  background: none;
-  border: 0;
-  cursor: pointer;
-  transition: color .3s var(--ease);
+/* The page's gold-on-maroon seal button has no contrast on warm white — make
+   it a gold hairline outline instead. Two lines: the Sinhala invitation, with
+   the English sitting quietly beneath it. */
+.env .btn--seal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 12px 30px;
+  line-height: 1.3;
+  color: var(--e-gold-dk);
+  background: rgba(255, 253, 248, .78);
+  border: 1px solid rgba(201, 162, 39, .55);
+  box-shadow: 0 10px 26px rgba(150, 130, 90, .18);
 }
 
-.env__skip:hover,
-.env__skip:focus-visible {
-  color: var(--saffron-light);
+.env .btn--seal .btn__si {
+  font-family: var(--sinhala);
+  font-size: .96rem;
+  font-weight: 600;
+  /* .btn tracks its type out and uppercases it. Neither suits Sinhala — the
+     letter-spacing pulls conjuncts apart, and there is no case to change. */
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-/* Reduced motion / no GSAP — show the card plainly, no flap theatre */
-.env.is-simple .env__flap,
-.env.is-simple .env__seal-wrap,
-.env.is-simple .env__pocket {
+.env .btn--seal .btn__sub {
+  font-size: .6rem;
+  letter-spacing: .22em;
+  opacity: .72;
+}
+
+.env .btn--seal:hover,
+.env .btn--seal:focus-visible {
+  background: #FFFDF8;
+  box-shadow: 0 16px 32px rgba(150, 130, 90, .26);
+}
+
+/* Reduced motion / no GSAP — show the card plainly, no envelope theatre. The
+   florals stay: they are scenery, not motion. */
+.env.is-simple .env__layer,
+.env.is-simple .env__closed,
+.env.is-simple .env__sealglow {
   display: none;
 }
 
 .env.is-simple .env__body {
   aspect-ratio: auto;
+  width: min(340px, 70vw);
+  min-height: min(486px, 100vw);
   perspective: none;
 }
 
 .env.is-simple .env__card {
   position: relative;
   left: 0;
-  bottom: 0;
-  width: 100%;
-  height: auto;
-  min-height: 250px;
-  padding: 30px 0;
+  top: 0;
+  transform: none;
 }
 
-.env.is-simple .env__card-inner {
-  height: auto;
-  padding-top: 110px;
+.env.is-simple .env__glow {
+  animation: none;
 }
 
 /* ── 5.2 Hero ── */
@@ -716,8 +884,8 @@ p {
   inset: -10%;
   z-index: -1;
   background:
-    radial-gradient(ellipse at 50% 34%, rgba(244, 193, 72, .26) 0%, transparent 58%),
-    radial-gradient(ellipse at 50% 100%, rgba(226, 135, 158, .18) 0%, transparent 60%);
+    radial-gradient(ellipse at 50% 34%, rgba(231, 206, 138, .26) 0%, transparent 58%),
+    radial-gradient(ellipse at 50% 100%, rgba(224, 196, 137, .24) 0%, transparent 60%);
   animation: kenBurns 20s ease-in-out infinite alternate;
 }
 
@@ -737,15 +905,13 @@ p {
   max-width: 720px;
 }
 
+/* Wider than the drawn lamp it replaces — the lotus is a landscape image, so
+   the same width would have left it half the height and lost in the frame. */
 .lamp {
-  width: clamp(72px, 12vw, 104px);
-  margin-bottom: 10px;
-  filter: drop-shadow(0 0 22px rgba(244, 193, 72, .55));
-}
-
-.lamp__flame {
-  transform-origin: 60px 52px;
-  animation: flicker 2.4s ease-in-out infinite;
+  display: block;
+  width: clamp(140px, 27vw, 210px);
+  margin: 0 auto 6px;
+  filter: drop-shadow(0 6px 26px rgba(231, 206, 138, .6));
 }
 
 .hero__eyebrow {
@@ -876,14 +1042,21 @@ p {
 }
 
 /* ── 5.3 Verse panel ── */
+/* Both this panel and the RSVP card are printed on the same stock: the pearl
+   card photograph, at full strength and anchored to its foot, so the flowers
+   gather along the bottom edge exactly as they do in the file however tall the
+   panel grows. Nothing is laid over it — the type sits straight on the card,
+   and the pale pearls carry dark text on their own. */
 .verse__panel {
   position: relative;
   max-width: 660px;
   margin: 0 auto;
   padding: clamp(42px, 7vw, 72px) clamp(26px, 5vw, 56px);
   text-align: center;
-  background: rgba(255, 253, 246, .78);
-  backdrop-filter: blur(4px);
+  background-image: url("images/inside_card_bg.jpeg");
+  background-size: cover;
+  background-position: center bottom;
+  border-radius: 18px;
   box-shadow: var(--shadow-soft);
 }
 
@@ -897,8 +1070,16 @@ p {
 
 .verse__lamp {
   display: block;
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+  width: 42px;
+  height: auto;
+  margin: 0 auto 10px;
+}
+
+/* Sits inline inside a sentence, so it rides the text baseline. */
+.cd__past-icon {
+  width: 24px;
+  height: auto;
+  vertical-align: -6px;
 }
 
 .verse__si {
@@ -908,9 +1089,14 @@ p {
   margin-bottom: 10px;
 }
 
+/* A stanza, not a sentence: `pre-line` keeps the line breaks written into the
+   verse — the text is set with textContent, so a <br> would never survive —
+   while still letting a line wrap on a narrow screen. */
 .verse__line {
   font-size: 1.02rem;
+  line-height: 2;
   color: var(--saffron-deep);
+  white-space: pre-line;
   margin-bottom: 14px;
 }
 
@@ -952,8 +1138,8 @@ p {
 .count {
   padding: clamp(18px, 3vw, 30px) 6px;
   text-align: center;
-  background: linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%);
-  border: 1px solid rgba(244, 193, 72, .3);
+  background: linear-gradient(160deg, var(--gold-surface) 0%, var(--gold-surface-deep) 100%);
+  border: 1px solid rgba(255, 244, 206, .45);
   border-radius: 4px;
   box-shadow: var(--shadow-soft);
 }
@@ -963,7 +1149,7 @@ p {
   font-size: clamp(1.9rem, 6vw, 3.2rem);
   font-weight: 500;
   line-height: 1;
-  color: var(--saffron-light);
+  color: var(--on-gold);
   font-variant-numeric: tabular-nums;
 }
 
@@ -974,7 +1160,7 @@ p {
   font-size: clamp(.56rem, 1.6vw, .68rem);
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: rgba(251, 243, 226, .7);
+  color: rgba(64, 47, 7, .72);
 }
 
 .count span.flip {
@@ -987,76 +1173,7 @@ p {
   color: var(--maroon);
 }
 
-/* ── 5.5 Story timeline ── */
-.timeline {
-  position: relative;
-  max-width: 760px;
-  margin: 0 auto;
-  padding-left: 34px;
-}
-
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
-  left: 7px;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--gold-line) 12%, var(--gold-line) 88%, transparent);
-}
-
-.tl-item {
-  position: relative;
-  margin-bottom: 42px;
-}
-
-.tl-item:last-child {
-  margin-bottom: 0;
-}
-
-.tl-dot {
-  position: absolute;
-  top: 8px;
-  left: -34px;
-  width: 15px;
-  height: 15px;
-  background: var(--paper);
-  border: 2px solid var(--saffron);
-  border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(224, 153, 31, .14);
-}
-
-.tl-year {
-  display: inline-block;
-  font-family: var(--sans);
-  font-size: .68rem;
-  letter-spacing: .22em;
-  color: var(--saffron-deep);
-}
-
-.tl-icon {
-  margin-left: 8px;
-  font-size: 1rem;
-}
-
-.tl-title {
-  font-size: clamp(1.3rem, 3.2vw, 1.75rem);
-  color: var(--maroon);
-  margin: 2px 0;
-}
-
-.tl-si {
-  font-size: .98rem;
-  color: var(--peacock);
-  margin-bottom: 6px;
-}
-
-.tl-text {
-  color: var(--ink-soft);
-  margin: 0;
-}
-
-/* ── 5.6 Day-of schedule ── */
+/* ── 5.5 Day-of schedule ── */
 .sch {
   max-width: 780px;
   margin: 0 auto;
@@ -1082,9 +1199,11 @@ p {
   border-bottom: 0;
 }
 
+/* The grid's first column is 44px, so the icon stays inside that. */
 .sch-icon {
-  font-size: 1.5rem;
-  line-height: 1.3;
+  width: 38px;
+  height: auto;
+  justify-self: center;
 }
 
 .sch-time {
@@ -1113,17 +1232,19 @@ p {
   margin: 0;
 }
 
-/* ── 5.7 RSVP ── */
+/* ── 5.6 RSVP ── */
+/* The same card stock as the verse panel — see the note there. */
 .rsvp__card {
   position: relative;
   max-width: 560px;
   margin: 0 auto;
   padding: clamp(40px, 6vw, 62px) clamp(24px, 5vw, 52px);
   text-align: center;
-  background: rgba(255, 253, 246, .86);
-  backdrop-filter: blur(4px);
+  background-image: url("images/inside_card_bg.jpeg");
+  background-size: cover;
+  background-position: center bottom;
   border: 1px solid var(--gold-line);
-  border-radius: 4px;
+  border-radius: 18px;
   box-shadow: var(--shadow-soft);
 }
 
@@ -1166,21 +1287,40 @@ form.is-sent button[type="submit"] {
   pointer-events: none;
 }
 
-/* ── 5.8 Footer ── */
+/* ── 5.7 Footer ── */
 .footer {
   position: relative;
   z-index: 2;
   padding: clamp(56px, 8vw, 88px) var(--gutter) clamp(70px, 9vw, 100px);
   text-align: center;
-  color: var(--paper);
-  background: linear-gradient(170deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+  color: var(--on-gold);
+  background: linear-gradient(170deg, var(--gold-surface) 0%, var(--gold-surface-deep) 100%);
+  /* The corner florals hang past the edges; this keeps them inside the band. */
+  overflow: hidden;
 }
+
+/* The envelope screen's own dried florals, brought round to the four corners.
+   The footer is a stacking context of its own, so a negative z-index puts them
+   above the gold gradient and behind every line of type. */
+.footer__fl {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  opacity: .92;
+  filter: drop-shadow(0 8px 16px rgba(92, 66, 8, .22));
+}
+
+.footer__fl--tl { top: -14%;    left: -7%;  width: min(230px, 34vw); transform: rotate(-6deg); }
+.footer__fl--tr { top: -16%;    right: -8%; width: min(250px, 36vw); transform: rotate(12deg) scaleX(-1); }
+.footer__fl--bl { bottom: -16%; left: -8%;  width: min(210px, 31vw); transform: rotate(8deg); }
+.footer__fl--br { bottom: -14%; right: -7%; width: min(225px, 33vw); transform: rotate(-10deg) scaleX(-1); }
 
 .footer__mono {
   font-family: var(--script);
   font-size: clamp(2.4rem, 8vw, 3.6rem);
   line-height: 1;
-  color: var(--saffron-light);
+  color: var(--on-gold);
   margin: 10px 0 6px;
 }
 
@@ -1188,28 +1328,22 @@ form.is-sent button[type="submit"] {
   font-family: var(--sans);
   font-size: .78rem;
   letter-spacing: .22em;
-  color: rgba(251, 243, 226, .82);
+  color: rgba(64, 47, 7, .78);
 }
 
 .footer__si {
   font-size: .98rem;
-  color: var(--saffron-light);
+  color: var(--on-gold);
   margin-top: 10px;
 }
 
 .footer__fine {
   margin-top: 16px;
   font-size: .88rem;
-  color: rgba(251, 243, 226, .6);
+  color: rgba(64, 47, 7, .62);
 }
 
 /* ═══ 6 · KEYFRAMES ═══════════════════════════════════ */
-@keyframes flicker {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-  25%      { transform: scale(1.08, .94) rotate(-2deg); opacity: .92; }
-  50%      { transform: scale(.95, 1.07) rotate(1.5deg); opacity: 1; }
-  75%      { transform: scale(1.04, .97) rotate(-1deg); opacity: .96; }
-}
 
 @keyframes shimmer {
   to { background-position: 200% center; }
@@ -1230,10 +1364,18 @@ form.is-sent button[type="submit"] {
   50%      { transform: scale(1.06); }
 }
 
+/* Breathes on the spot: the translate has to be restated in every keyframe or
+   the element jumps off its anchor for the whole animation. */
+@keyframes sealGlowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: .7; }
+  50%      { transform: translate(-50%, -50%) scale(1.14); opacity: 1; }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: .65; transform: translate(-50%, -50%) scale(1); }
   50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
 }
+
 
 @keyframes eq {
   0%, 100% { height: 5px; }
@@ -1293,14 +1435,6 @@ form.is-sent button[type="submit"] {
 
   .hero__feather {
     display: none;
-  }
-
-  .timeline {
-    padding-left: 28px;
-  }
-
-  .tl-dot {
-    left: -28px;
   }
 
   .dock__btn {

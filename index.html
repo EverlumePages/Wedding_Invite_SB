@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#6E1423" />
+  <meta name="theme-color" content="#7A5A16" />
   <meta name="description" content="Lahiru &amp; Sanduni — a traditional Sri Lankan Poruwa wedding ceremony. You are warmly invited." />
   <title>Lahiru &amp; Sanduni · Wedding Invitation</title>
 
@@ -17,7 +17,10 @@
 
   <link rel="stylesheet" href="styles.css" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%AA%94%3C/text%3E%3C/svg%3E" />
+  <!-- Cropped to the rings themselves, so they fill the tab rather than
+       floating in the source image's padding. -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png" />
 
   <!-- Gate every hidden/animated state behind JS, so the invitation still
        reads perfectly with JavaScript disabled. -->
@@ -32,77 +35,90 @@
        ENVELOPE INTRO — the signature reveal
        ═══════════════════════════════════════════════════ -->
   <div id="envelope" class="env" role="dialog" aria-modal="true" aria-labelledby="envTitle">
+
+    <!-- A warm key light behind the envelope, and a vignette to seat the
+         flat-lay on the page. The photography carries the texture, so the
+         backdrop stays deliberately plain. -->
     <div class="env__glow" aria-hidden="true"></div>
 
-    <div class="env__body">
-      <!-- The card that rises out of the envelope -->
-      <div class="env__card" id="envCard">
-        <div class="env__card-inner">
-          <svg class="env__mono" viewBox="0 0 120 120" aria-hidden="true">
-            <circle id="envMonoRing" cx="60" cy="60" r="52" fill="none"
-                    stroke="#E0991F" stroke-width="1.5" />
-            <circle cx="60" cy="60" r="44" fill="none"
-                    stroke="#E0991F" stroke-width="0.6" stroke-opacity=".5" />
-          </svg>
-          <span class="env__monogram" id="envMonogram">L &amp; S</span>
-          <span class="env__si" lang="si">සුභ මංගලම්</span>
-          <span class="env__label">You are invited</span>
+    <!-- Dried florals at the corners, as in the reference flat-lay. Decorative
+         only, so every one is alt="" and hidden from the accessibility tree. -->
+    <img class="env__fl env__fl--tl" src="images/envelope/fl-spray.webp"   alt="" aria-hidden="true" decoding="async" />
+    <img class="env__fl env__fl--tr" src="images/envelope/fl-cluster.webp" alt="" aria-hidden="true" decoding="async" />
+    <img class="env__fl env__fl--bl" src="images/envelope/fl-peony.webp"   alt="" aria-hidden="true" decoding="async" />
+    <img class="env__fl env__fl--br" src="images/envelope/fl-lace.webp"    alt="" aria-hidden="true" decoding="async" />
+    <img class="env__fl env__fl--r"  src="images/envelope/fl-bloom.webp"   alt="" aria-hidden="true" decoding="async" />
+
+    <!-- The intro's own petal layer — the page's #petals canvas sits far below
+         this overlay. Leaves with the overlay. -->
+    <canvas class="env__petals" id="introPetals" aria-hidden="true"></canvas>
+
+    <!-- The push-in scales this wrapper, leaving .env__body's own tweens free. -->
+    <div class="env__stage">
+      <div class="env__body">
+
+        <!-- The envelope, split into two layers so the card can rise from
+             between them exactly as it would out of a real pocket. Both are
+             padded to the same frame, so they realign at any size. -->
+        <img class="env__layer env__layer--back" src="images/envelope/env-back.webp"
+             alt="" aria-hidden="true" decoding="async" />
+
+        <!-- Two faces, so the 360° turn shows a designed reverse rather than
+             mirrored type. -->
+        <div class="env__card" id="envCard">
+          <div class="env__face env__face--front">
+            <div class="env__card-inner">
+              <svg class="env__mono" viewBox="0 0 120 120" aria-hidden="true">
+                <circle id="envMonoRing" cx="60" cy="60" r="52" fill="none"
+                        stroke="#C9A227" stroke-width="1.5" />
+                <circle cx="60" cy="60" r="44" fill="none"
+                        stroke="#C9A227" stroke-width="0.6" stroke-opacity=".5" />
+              </svg>
+              <span class="env__monogram" id="envMonogram">L &amp; S</span>
+              <span class="env__si" lang="si">සුභ මංගලම්</span>
+              <span class="env__label">You are invited</span>
+              <svg class="env__flourish" viewBox="0 0 140 20" aria-hidden="true">
+                <g fill="none" stroke="#C9A227" stroke-width="1.1" stroke-linecap="round" stroke-opacity=".75">
+                  <path d="M8 10 q22 -7 44 0 M132 10 q-22 -7 -44 0" />
+                  <path d="M62 10 c0 -5 4 -7 7 -4 c2 2 1 5 -2 6 c4 1 6 4 4 6 c-3 3 -6 0 -6 -4" />
+                  <path d="M78 10 c0 -5 -4 -7 -7 -4 c-2 2 -1 5 2 6 c-4 1 -6 4 -4 6 c3 3 6 0 6 -4" />
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="env__face env__face--back" aria-hidden="true">
+            <svg class="env__back-ring" viewBox="0 0 120 120" aria-hidden="true">
+              <circle cx="60" cy="60" r="52" fill="none" stroke="#C9A227" stroke-width="1.4" stroke-opacity=".8" />
+              <circle cx="60" cy="60" r="44" fill="none" stroke="#C9A227" stroke-width="0.6" stroke-opacity=".45" />
+            </svg>
+            <span class="env__back-mono">L &amp; S</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Envelope back + pocket -->
-      <div class="env__pocket" aria-hidden="true"></div>
+        <img class="env__layer env__layer--front" src="images/envelope/env-front.webp"
+             alt="" aria-hidden="true" decoding="async" />
 
-      <!-- The flap that swings open -->
-      <div class="env__flap" id="envFlap" aria-hidden="true">
-        <svg class="env__flap-art" viewBox="0 0 400 200" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="flapGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8A2435" />
-              <stop offset="100%" stop-color="#4A0E18" />
-            </linearGradient>
-          </defs>
-          <path d="M0 0 H400 L200 190 Z" fill="url(#flapGrad)" />
-          <path d="M0 0 L200 190 L400 0" fill="none" stroke="#E0991F" stroke-width="2" stroke-opacity=".55" />
-          <!-- inner rule tracing the fold, as on a Kandyan card -->
-          <path d="M26 0 L200 162 L374 0" fill="none" stroke="#F4C148" stroke-width="1" stroke-opacity=".35" />
-          <!-- liya vela (lotus-creeper) scroll, symmetric about the fold -->
-          <path d="M110 26 q22 -16 45 0 q23 16 45 0 q22 16 45 0 q23 -16 45 0"
-                fill="none" stroke="#F4C148" stroke-width="1.3" stroke-opacity=".55" stroke-linecap="round" />
-          <g fill="#F4C148" fill-opacity=".5">
-            <circle cx="110" cy="26" r="2.4" />
-            <circle cx="290" cy="26" r="2.4" />
-            <circle cx="200" cy="26" r="1.8" />
-          </g>
-        </svg>
-      </div>
+        <!-- The sealed envelope, on top of the open one until the guest taps.
+             Cut from the second photograph along the flap's own triangle, so
+             the flap can swing on its hinge and the body beneath it stays put.
+             Both photographs share a frame, so every layer stays registered. -->
+        <img class="env__closed env__closed--body" id="envClosedBody"
+             src="images/envelope/closed-body.webp" alt="" aria-hidden="true" decoding="async" />
+        <img class="env__closed env__closed--flap" id="envClosedFlap"
+             src="images/envelope/closed-flap.webp" alt="" aria-hidden="true" decoding="async" />
 
-      <!-- Wax seal + the shards it breaks into -->
-      <div class="env__seal-wrap" aria-hidden="true">
-        <div class="env__seal" id="envSeal">
-          <svg viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="36" fill="#6E1423" />
-            <circle cx="40" cy="40" r="30" fill="none" stroke="#F4C148" stroke-width="1.2" stroke-opacity=".7" />
-            <!-- nelum (lotus) -->
-            <g fill="none" stroke="#F4C148" stroke-width="1.8" stroke-linecap="round">
-              <path d="M40 24 c7 8 7 16 0 24 c-7 -8 -7 -16 0 -24z" />
-              <path d="M40 48 c-9 -3 -14 -9 -15 -17 c8 1 13 6 15 17z" />
-              <path d="M40 48 c9 -3 14 -9 15 -17 c-8 1 -13 6 -15 17z" />
-              <path d="M26 52 q14 8 28 0" />
-            </g>
-          </svg>
-        </div>
-        <span class="env__shard"></span><span class="env__shard"></span>
-        <span class="env__shard"></span><span class="env__shard"></span>
-        <span class="env__shard"></span><span class="env__shard"></span>
-        <span class="env__shard"></span><span class="env__shard"></span>
+        <!-- A breath of light on the wax seal, so the eye knows where to press. -->
+        <span class="env__sealglow" id="envSealGlow" aria-hidden="true"></span>
       </div>
     </div>
 
     <div class="env__hint">
       <h1 id="envTitle" class="env__title">An invitation awaits</h1>
-      <button type="button" class="btn btn--seal" id="envOpen">Break the seal</button>
-      <button type="button" class="env__skip" id="envSkip">Skip intro</button>
+      <button type="button" class="btn btn--seal" id="envOpen">
+        <span class="btn__si" lang="si">ආරාධනය විවෘත කරන්න</span>
+        <span class="btn__sub">Break the seal</span>
+      </button>
     </div>
   </div>
 
@@ -112,40 +128,26 @@
   <header class="hero" id="top">
     <!-- Kandyan corner motifs, drifting on scroll -->
     <svg class="hero__feather hero__feather--l" viewBox="0 0 120 300" aria-hidden="true" data-parallax="0.14">
-      <g fill="none" stroke="#0F6E64" stroke-width="1.2" stroke-opacity=".38">
+      <g fill="none" stroke="#8A7340" stroke-width="1.2" stroke-opacity=".38">
         <path d="M60 300 C60 200 30 150 60 60" />
         <path d="M60 60 C40 40 30 20 60 4 C90 20 80 40 60 60z" />
-        <ellipse cx="60" cy="34" rx="9" ry="13" stroke="#E0991F" stroke-opacity=".5" />
+        <ellipse cx="60" cy="34" rx="9" ry="13" stroke="#C9A227" stroke-opacity=".5" />
         <path d="M60 240 q-30 -14 -34 -44 M60 200 q30 -14 34 -44 M60 160 q-26 -12 -30 -38" />
       </g>
     </svg>
     <svg class="hero__feather hero__feather--r" viewBox="0 0 120 300" aria-hidden="true" data-parallax="-0.1">
-      <g fill="none" stroke="#0F6E64" stroke-width="1.2" stroke-opacity=".38">
+      <g fill="none" stroke="#8A7340" stroke-width="1.2" stroke-opacity=".38">
         <path d="M60 300 C60 200 90 150 60 60" />
         <path d="M60 60 C40 40 30 20 60 4 C90 20 80 40 60 60z" />
-        <ellipse cx="60" cy="34" rx="9" ry="13" stroke="#E0991F" stroke-opacity=".5" />
+        <ellipse cx="60" cy="34" rx="9" ry="13" stroke="#C9A227" stroke-opacity=".5" />
         <path d="M60 240 q30 -14 34 -44 M60 200 q-30 -14 -34 -44 M60 160 q26 -12 30 -38" />
       </g>
     </svg>
 
     <div class="hero__frame">
-      <!-- pahana — the oil lamp, lit -->
-      <svg class="lamp" viewBox="0 0 120 150" aria-hidden="true">
-        <g class="lamp__flame">
-          <path d="M60 26 c9 10 13 18 8 26 c-3 5 -10 7 -16 3 c-6 -4 -6 -12 -1 -18 c3 -4 6 -7 9 -11z"
-                fill="#F4C148" />
-          <path d="M60 36 c5 6 7 11 4 15 c-2 3 -6 4 -9 2 c-3 -2 -3 -7 -1 -10z" fill="#FFFDF6" />
-        </g>
-        <g fill="none" stroke="#B9760C" stroke-width="2" stroke-linecap="round">
-          <path d="M40 60 h40 l-6 12 h-28z" fill="#E0991F" fill-opacity=".85" stroke="none" />
-          <path d="M34 60 q26 -8 52 0" />
-          <path d="M60 72 v22" />
-          <path d="M42 94 q18 -8 36 0 l6 14 q-24 8 -48 0z" fill="#E0991F" fill-opacity=".7" stroke="none" />
-          <path d="M42 94 q18 -8 36 0 l6 14 q-24 8 -48 0z" />
-          <path d="M34 112 q26 10 52 0" />
-          <path d="M30 118 q30 12 60 0 l-8 10 q-22 8 -44 0z" fill="#B9760C" fill-opacity=".55" stroke="none" />
-        </g>
-      </svg>
+      <!-- pahana — the lotus lamp, lit. The flame animates in the file, so
+           there is no flicker to drive from CSS. -->
+      <img class="lamp" src="images/lotus-lamp.webp" alt="" aria-hidden="true" decoding="async" />
 
       <p class="hero__eyebrow" lang="si">සුභ මංගලම්</p>
       <p class="hero__greeting" id="guestGreeting" hidden></p>
@@ -185,26 +187,29 @@
     <div class="verse__panel reveal">
       <!-- liya vela border -->
       <svg class="verse__border" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="8" y="8" width="584" height="384" fill="none" stroke="#B9760C" stroke-width="1.5" stroke-opacity=".5" />
-        <rect x="18" y="18" width="564" height="364" fill="none" stroke="#B9760C" stroke-width="0.6" stroke-opacity=".35" />
+        <rect x="8" y="8" width="584" height="384" rx="9" fill="none" stroke="#A8801A" stroke-width="1.5" stroke-opacity=".5" />
+        <rect x="18" y="18" width="564" height="364" rx="6" fill="none" stroke="#A8801A" stroke-width="0.6" stroke-opacity=".35" />
       </svg>
 
-      <span class="verse__lamp" aria-hidden="true">🪔</span>
+      <img class="verse__lamp" src="images/icons/lamp.webp" alt="" aria-hidden="true" decoding="async" />
       <p class="verse__si" id="verseSi" lang="si">ජයමංගල ගාථා</p>
-      <p class="verse__line" id="verseLine" lang="si">සබ්බීතියෝ විවජ්ජන්තු · සබ්බ රෝගෝ විනස්සතු</p>
+      <p class="verse__line" id="verseLine" lang="si">බාහුං සහස්ස මභිනිම් මිත සා යුධං තං
+ගිරි මේඛලං උදිත ඝෝර සසේන මාරං
+දානාදි ධම්ම විධිනා ජිත වා මුනින්දෝ
+තං තේජසා භවතු (තේ) ජය මංගලානී</p>
       <p class="verse__en" id="verseEn">May all misfortunes be averted…</p>
 
       <div class="ornament" aria-hidden="true">
         <!-- hansa puttuwa — the swan knot -->
         <svg viewBox="0 0 240 40">
-          <path class="ornament__path" d="M20 20 H90" fill="none" stroke="#B9760C" stroke-width="1.2" />
+          <path class="ornament__path" d="M20 20 H90" fill="none" stroke="#A8801A" stroke-width="1.2" />
           <path class="ornament__path"
                 d="M100 20 c0 -10 8 -14 14 -8 c4 4 2 10 -4 12 c8 2 12 8 8 12 c-5 5 -12 0 -12 -8 c0 -10 10 -14 14 -8 c4 5 0 12 -8 14"
-                fill="none" stroke="#B9760C" stroke-width="1.4" stroke-linecap="round" />
+                fill="none" stroke="#A8801A" stroke-width="1.4" stroke-linecap="round" />
           <path class="ornament__path"
                 d="M140 20 c0 -10 -8 -14 -14 -8 c-4 4 -2 10 4 12 c-8 2 -12 8 -8 12 c5 5 12 0 12 -8"
-                fill="none" stroke="#B9760C" stroke-width="1.4" stroke-linecap="round" />
-          <path class="ornament__path" d="M150 20 H220" fill="none" stroke="#B9760C" stroke-width="1.2" />
+                fill="none" stroke="#A8801A" stroke-width="1.4" stroke-linecap="round" />
+          <path class="ornament__path" d="M150 20 H220" fill="none" stroke="#A8801A" stroke-width="1.2" />
         </svg>
       </div>
 
@@ -222,7 +227,7 @@
        COUNTDOWN
        ═══════════════════════════════════════════════════ -->
   <section class="cd section" id="countdown-section">
-    <h2 class="section__title reveal">Counting down to the muhurthaya</h2>
+    <h2 class="section__title reveal">Counting down to the day</h2>
     <p class="section__si reveal" lang="si">සුභ මුහූර්තය දක්වා</p>
 
     <div class="cd__grid" id="countdown">
@@ -232,16 +237,7 @@
       <div class="count reveal"><span id="cd-secs">00</span><label>Seconds</label></div>
     </div>
 
-    <p class="cd__past" id="countdownPast" hidden>Today is the day. 🪔</p>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════
-       OUR STORY
-       ═══════════════════════════════════════════════════ -->
-  <section class="story section" id="story">
-    <h2 class="section__title reveal">Our story</h2>
-    <p class="section__si reveal" lang="si">ආදර කතාව</p>
-    <div class="timeline" id="timeline"></div>
+    <p class="cd__past" id="countdownPast" hidden>Today is the day. <img class="cd__past-icon" src="images/icons/lamp.webp" alt="" aria-hidden="true" decoding="async" /></p>
   </section>
 
   <!-- ═══════════════════════════════════════════════════
@@ -262,14 +258,14 @@
 
     <div class="cards">
       <div class="card reveal">
-        <span class="card__icon" aria-hidden="true">🕰️</span>
+        <img class="card__icon" src="images/icons/clock.webp" alt="" aria-hidden="true" decoding="async" />
         <h3>When</h3>
         <p><strong id="detailDate"></strong></p>
         <p id="detailNakatha"></p>
       </div>
 
       <div class="card reveal">
-        <span class="card__icon" aria-hidden="true">🛕</span>
+        <img class="card__icon" src="images/icons/hotel.webp" alt="" aria-hidden="true" decoding="async" />
         <h3>Where</h3>
         <p><strong id="detailVenue"></strong></p>
         <p lang="si" id="detailVenueSi"></p>
@@ -279,7 +275,7 @@
       </div>
 
       <div class="card reveal">
-        <span class="card__icon" aria-hidden="true">👘</span>
+        <img class="card__icon" src="images/icons/clothes.webp" alt="" aria-hidden="true" decoding="async" />
         <h3>Dress code</h3>
         <p><strong id="detailDress"></strong></p>
         <p id="detailDressNote"></p>
@@ -295,13 +291,13 @@
       <!-- nelum — drawn rather than an emoji, since U+1FAB7 is too new for
            many system emoji fonts and falls back to a tofu box. -->
       <svg class="rsvp__lotus" viewBox="0 0 64 48" aria-hidden="true">
-        <g fill="none" stroke="#E0991F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <g fill="none" stroke="#C9A227" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M32 6 c6 8 6 16 0 24 c-6 -8 -6 -16 0 -24z" />
           <path d="M32 30 c-9 -2 -15 -9 -16 -18 c9 1 14 7 16 18z" />
           <path d="M32 30 c9 -2 15 -9 16 -18 c-9 1 -14 7 -16 18z" />
-          <path d="M32 31 c-11 1 -19 -3 -24 -11 c10 -2 18 2 24 11z" stroke="#B9760C" stroke-opacity=".7" />
-          <path d="M32 31 c11 1 19 -3 24 -11 c-10 -2 -18 2 -24 11z" stroke="#B9760C" stroke-opacity=".7" />
-          <path d="M14 34 q18 10 36 0" stroke="#E2879E" />
+          <path d="M32 31 c-11 1 -19 -3 -24 -11 c10 -2 18 2 24 11z" stroke="#A8801A" stroke-opacity=".7" />
+          <path d="M32 31 c11 1 19 -3 24 -11 c-10 -2 -18 2 -24 11z" stroke="#A8801A" stroke-opacity=".7" />
+          <path d="M14 34 q18 10 36 0" stroke="#D9BE84" />
         </g>
       </svg>
       <h2 class="section__title">Will you join us?</h2>
@@ -340,11 +336,21 @@
        FOOTER
        ═══════════════════════════════════════════════════ -->
   <footer class="footer">
+    <!-- The same dried florals the envelope screen opens with, gathered into
+         the four corners so the gold band is not left empty. Decorative only,
+         so every one is alt="" and hidden from the accessibility tree. -->
+    <img class="footer__fl footer__fl--tl" src="images/envelope/fl-spray.webp"   alt="" aria-hidden="true" decoding="async" loading="lazy" />
+    <img class="footer__fl footer__fl--tr" src="images/envelope/fl-cluster.webp" alt="" aria-hidden="true" decoding="async" loading="lazy" />
+    <img class="footer__fl footer__fl--bl" src="images/envelope/fl-peony.webp"   alt="" aria-hidden="true" decoding="async" loading="lazy" />
+    <img class="footer__fl footer__fl--br" src="images/envelope/fl-lace.webp"    alt="" aria-hidden="true" decoding="async" loading="lazy" />
+
     <div class="ornament ornament--light" aria-hidden="true">
       <svg viewBox="0 0 240 40">
-        <path class="ornament__path" d="M20 20 H100" fill="none" stroke="#F4C148" stroke-width="1" stroke-opacity=".6" />
-        <path class="ornament__path" d="M120 10 c8 6 8 14 0 20 c-8 -6 -8 -14 0 -20z" fill="none" stroke="#F4C148" stroke-width="1.4" />
-        <path class="ornament__path" d="M140 20 H220" fill="none" stroke="#F4C148" stroke-width="1" stroke-opacity=".6" />
+        <!-- Deep brown, not pale gold: this divider used to sit on a dark
+             footer and now sits on a gold one. -->
+        <path class="ornament__path" d="M20 20 H100" fill="none" stroke="#402F07" stroke-width="1" stroke-opacity=".5" />
+        <path class="ornament__path" d="M120 10 c8 6 8 14 0 20 c-8 -6 -8 -14 0 -20z" fill="none" stroke="#402F07" stroke-width="1.4" stroke-opacity=".7" />
+        <path class="ornament__path" d="M140 20 H220" fill="none" stroke="#402F07" stroke-width="1" stroke-opacity=".5" />
       </svg>
     </div>
 
